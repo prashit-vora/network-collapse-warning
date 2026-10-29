@@ -151,3 +151,11 @@ Open the notebook using the badge and choose **Runtime → Run all**. A CPU runt
 The first implementation is in [`notebooks/01_baseline_simulation.ipynb`](notebooks/01_baseline_simulation.ipynb). It contains hand-calculated cascade checks, a reproducible 100-node simulation, workload accounting checks, plots with node counts and percentages, a round-by-round cascade view, and an HTML animation. Core simulation checks passed locally, including 20 seeded runs. The updated charts were also executed through Colab MCP and visually checked. Time-to-collapse prediction and topology comparison remain future work.
 
 The notebook also explains a future continuous-time extension: differential equations evolve loads between discrete failure and redistribution events (a hybrid dynamical system).
+
+## Experiment 2: 50 independent seeded runs
+
+[Open the self-contained experiment in Colab](https://colab.research.google.com/github/prashit-vora/network-collapse-warning/blob/main/notebooks/02_repeated_baseline_experiment.ipynb) and select **Runtime → Run all**. This version skips the animation.
+
+The final section of the notebook repeats the unchanged baseline with seeds 1000–1049. It reports collapse timing, first failure, largest cascade, and stress before collapse. It plots collapse-step distribution, failure trajectories for the first ten seeds, and a retrospective near-overload indicator aligned by steps remaining. CSV summaries and full settled histories are saved under `experiment_results/` in the runtime.
+
+Run the baseline definition cells first, then the last two experiment code cells. The animation is optional and can be skipped. This experiment measures joint variability in random graph structure and initial loads; it does not yet fit a remaining-time predictor. The across-run shaded band is not a calibrated prediction interval.
