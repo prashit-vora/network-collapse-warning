@@ -159,3 +159,9 @@ The notebook also explains a future continuous-time extension: differential equa
 The final section of the notebook repeats the unchanged baseline with seeds 1000–1049. It reports collapse timing, first failure, largest cascade, and stress before collapse. It plots collapse-step distribution, failure trajectories for the first ten seeds, and a retrospective near-overload indicator aligned by steps remaining. CSV summaries and full settled histories are saved under `experiment_results/` in the runtime.
 
 Run the baseline definition cells first, then the last two experiment code cells. The animation is optional and can be skipped. This experiment measures joint variability in random graph structure and initial loads; it does not yet fit a remaining-time predictor. The across-run shaded band is not a calibrated prediction interval.
+
+## Experiment 3: capacity variation
+
+[Open the capacity experiment in Colab](https://colab.research.google.com/github/prashit-vora/network-collapse-warning/blob/main/notebooks/03_capacity_variation_experiment.ipynb) and select **Runtime → Run all**.
+
+Compare equal capacities with mild (8–12) and larger (7–13) variation across 50 paired seeds per setting. Total capacity stays exactly 1,000 units; each paired seed keeps graph structure and initial loads identical. The main outcome is the number of external steps from first failure to collapse. The 7–13 bounds ensure the shared initial loads (4–7) remain below capacity. The notebook checks pairing and workload accounting, creates three comparison plots, and exports a 150-run CSV. It does not assume heterogeneity produces gradual failure.
