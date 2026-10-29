@@ -148,6 +148,6 @@ network-collapse-warning/
 
 Open the notebook using the badge and choose **Runtime → Run all**. A CPU runtime is enough. No local installation is needed. Colab normally includes the required libraries; the notebook explains what to do if an import is missing.
 
-The first implementation is in [`notebooks/01_baseline_simulation.ipynb`](notebooks/01_baseline_simulation.ipynb). It contains hand-calculated cascade checks, a reproducible 100-node simulation, workload accounting checks, plots, and an HTML animation. Core simulation checks passed locally, including 20 seeded runs; complete notebook rendering is left for the Colab run. Time-to-collapse prediction and topology comparison remain future work.
+The first implementation is in [`notebooks/01_baseline_simulation.ipynb`](notebooks/01_baseline_simulation.ipynb). It contains hand-calculated cascade checks, a reproducible 100-node simulation, workload accounting checks, plots with node counts and percentages, a round-by-round cascade view, and an HTML animation. Core simulation checks passed locally, including 20 seeded runs. The updated charts were also executed through Colab MCP and visually checked. Time-to-collapse prediction and topology comparison remain future work.
 
 The notebook also explains a future continuous-time extension: differential equations evolve loads between discrete failure and redistribution events (a hybrid dynamical system).
