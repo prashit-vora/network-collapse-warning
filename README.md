@@ -4,7 +4,9 @@
 
 ## Research question
 
-Can measurements of a network's current condition warn us before it suffers a large cascade of failures? Do the same warning rules work across random, small-world, and scale-free networks?
+Can measurements at each settled simulation step estimate **how many steps remain until network collapse**, with calibrated uncertainty? Do those estimates generalize across random, small-world, and scale-free networks?
+
+The primary prediction target is a distribution over remaining collapse time, summarized by an estimated remaining time and probabilities for time ranges or cumulative probabilities such as collapse within 5 or 10 steps. A fixed-horizon binary alarm is only an optional summary, not the main task. Predictions are conditional on the specified future demand process. For completed collapse trajectories, the observed remaining time at step t is `collapse_step - t`; this outcome must never be supplied as an input feature. Collapse time is an outcome, not a hyperparameter.
 
 This is a simulation research project. No prediction performance has been demonstrated yet.
 
@@ -93,13 +95,18 @@ Measure settled, pre-collapse states only. Record initial indicators before the 
 
 ## Warning settings versus simulation parameters
 
-Simulation parameters define the system: graph size/connectivity, capacities, initial loads, demand increments, and collapse threshold. Warning hyperparameters define the detector: indicator thresholds, forecast horizon, optional rolling-window length, and alarm persistence.
+Simulation settings define the system: graph size/connectivity, capacities, initial loads, demand increments, and collapse threshold. Prediction hyperparameters configure the future remaining-time model, such as model complexity or history-window length. Optional alarm summaries additionally use indicator thresholds, a reporting horizon, and alarm persistence. The realized collapse step is an outcome, never a setting.
 
-Start with interpretable threshold rules rather than machine learning. A pilot forecast horizon could be H = 10 future external steps, and alarm persistence could start at one observation. These are provisional choices. If rolling statistics are later added, window length becomes another hyperparameter.
+Start with simple remaining-time baselines before complex models; interpretable threshold alarms can be supplementary comparisons. A pilot forecast horizon could be H = 10 future external steps, and alarm persistence could start at one observation. These are provisional choices. If rolling statistics are later added, window length becomes another hyperparameter.
 
 Fit indicator thresholds using training runs only. Use validation runs for tuning; reserve independent test runs for final evaluation. Split entire simulation runs, not individual time steps, to prevent leakage. Report sensitivity to H and stress rate because warning lead time depends on both.
 
-## Evaluation
+## Remaining-time prediction and evaluation
+
+At every settled pre-collapse state, use only information available at that time to predict a probability distribution over future collapse steps. Summarize it with a point estimate (for example, a median), uncertainty intervals, and probabilities for chosen time ranges. Evaluate remaining-time errors against simple elapsed-time and demand baselines, assess interval coverage and probability calibration, and split by complete simulation runs. Runs without observed collapse require censoring-aware treatment rather than invented collapse times. Keep the provisional 30% failure definition unless explicitly revised.
+
+The following alarm metrics are supplementary views of the time distribution:
+
 
 - Warning lead time: collapse step minus first qualifying warning step; also report demand increase between warning and collapse.
 - Missed-collapse rate: fraction of collapse runs without an alarm in the defined pre-collapse forecast window.
@@ -135,4 +142,12 @@ network-collapse-warning/
 └── results/
 ```
 
-Only the README is currently implemented. Installation and run instructions will be added alongside working code.
+## Run in Google Colab
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/prashit-vora/network-collapse-warning/blob/main/notebooks/01_baseline_simulation.ipynb)
+
+Open the notebook using the badge and choose **Runtime → Run all**. A CPU runtime is enough. No local installation is needed. Colab normally includes the required libraries; the notebook explains what to do if an import is missing.
+
+The first implementation is in [`notebooks/01_baseline_simulation.ipynb`](notebooks/01_baseline_simulation.ipynb). It contains hand-calculated cascade checks, a reproducible 100-node simulation, workload accounting checks, plots, and an HTML animation. Core simulation checks passed locally, including 20 seeded runs; complete notebook rendering is left for the Colab run. Time-to-collapse prediction and topology comparison remain future work.
+
+The notebook also explains a future continuous-time extension: differential equations evolve loads between discrete failure and redistribution events (a hybrid dynamical system).
