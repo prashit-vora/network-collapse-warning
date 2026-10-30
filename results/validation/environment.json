@@ -1,0 +1,14 @@
+{
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "networkx": "3.7",
+  "matplotlib": "3.11.2",
+  "simulation_source_sha256": "0257073df7fce76fb041b958d8b3a7aa7d5c084b98c88acb31c1affa8dc748a0",
+  "topology_seeds": "2000\u20132049",
+  "training_seeds": "10000\u201310029",
+  "test_seeds": "3000\u20133029",
+  "reference_check_seeds": "7000\u20137009",
+  "observation_step": 20,
+  "paths_per_test": 300,
+  "horizon": 1000
+}
