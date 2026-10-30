@@ -165,3 +165,9 @@ Run the baseline definition cells first, then the last two experiment code cells
 [Open the capacity experiment in Colab](https://colab.research.google.com/github/prashit-vora/network-collapse-warning/blob/main/notebooks/03_capacity_variation_experiment.ipynb) and select **Runtime → Run all**.
 
 Compare equal capacities with mild (8–12) and larger (7–13) variation across 50 paired seeds per setting. Total capacity stays exactly 1,000 units; each paired seed keeps graph structure and initial loads identical. The main outcome is the number of external steps from first failure to collapse. The 7–13 bounds ensure the shared initial loads (4–7) remain below capacity. The notebook checks pairing and workload accounting, creates three comparison plots, and exports a 150-run CSV. It does not assume heterogeneity produces gradual failure.
+
+## Experiment 4: derived deterministic event solution
+
+[Open the solved-model notebook in Colab](https://colab.research.google.com/github/prashit-vora/network-collapse-warning/blob/main/notebooks/04_solved_deterministic_model.ipynb).
+
+Derives and solves the load ODE between failures, specifies synchronous redistribution jumps, and calculates collapse by advancing from one failure event to the next. A separate integer event formula preserves the original strict-overload, whole-step convention. That discrete solver matched original collapse steps on 150 cases (50 seeds across three capacity settings). The continuous capacity-crossing model uses a different boundary convention and is not claimed to be identical. For seed 1000 with capacity spread 0.3, discrete collapse is step 65 and continuous collapse time is approximately 64.836971. This is a deterministic full-state calculation, not a trained or probabilistic predictor. Topology comparison remains outstanding.
