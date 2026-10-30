@@ -65,3 +65,7 @@ Forecast validation currently uses only observation step 20, capacity spread 0.3
 [References and software attribution](REFERENCES.md) distinguish published background from our specific modeling choices. Development used OpenAI Codex/ChatGPT assistance; the group must review and understand the analysis and follow its course's requirements.
 
 The course requires an IEEE two-column LaTeX report, at most six pages including references, submitted as PDF by October 30, 2026. The exact supplied checklist is saved in [REPORT_REQUIREMENTS.md](REPORT_REQUIREMENTS.md). The final report PDF has not been authored or submitted as part of the validation task.
+
+## Additional failure-progression figure
+
+[Open notebook 07 in Colab](https://colab.research.google.com/github/prashit-vora/network-collapse-warning/blob/main/notebooks/07_random_failure_progression.ipynb). It shows 50 random-demand trajectories continued beyond the 30-node threshold until complete failure. The ensemble mean and an explicit early-damage zoom clarify small failures before major cascades. Individual paths remain stepped; no smoothing or favorable-seed selection is used. Data and figures are in results/validation/random_demand_failure_*; reproduce with `python src/plot_failure_progression.py`.
